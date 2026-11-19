@@ -799,3 +799,38 @@ update public.products set name_fr = 'Sandwich Chicken Tikka', name_en = 'Chicke
 update public.products set name_fr = 'Jus en boîte PM' where name_fr = 'Jus en boite PM';
 update public.products set name_fr = 'Méga au choix' where name_fr = 'MEGA AU CHOIX';
 update public.products set name_fr = 'Sandwich Chawarma + Kiri' where name_fr = 'Sandwich Chawarma + kiri';
+
+-- 3. Initial Categories for Chef Eyad
+insert into public.categories (name_ar, name_fr, name_en, sort_order)
+values
+  ('الأطباق الرئيسية', 'Plats', 'Main Dishes', 1),
+  ('المقبلات', 'Entrées', 'Starters', 2),
+  ('الغراتان', 'Gratins', 'Gratins', 3),
+  ('الشاورما', 'Chawarma', 'Shawarma', 4),
+  ('البرغر', 'Burgers', 'Burgers', 5),
+  ('التاكوس', 'Tacos', 'Tacos', 6),
+  ('السندويتشات', 'Sandwiches', 'Sandwiches', 7),
+  ('البانيني', 'Paninis', 'Paninis', 8),
+  ('البيتزا', 'Pizzas', 'Pizzas', 9),
+  ('المشروبات الباردة', 'Boissons fraîches', 'Cold Drinks', 10),
+  ('المشروبات الساخنة', 'Boissons chaudes', 'Hot Drinks', 11),
+  ('الإضافات', 'Suppléments & Extras', 'Sides & Extras', 12)
+on conflict do nothing;
+
+-- 4. Initial Restaurant Settings for Chef Eyad
+update public.restaurant_settings set
+  name = 'Chef Eyad',
+  name_ar = 'شيف إياد',
+  name_fr = 'Chef Eyad',
+  name_en = 'Chef Eyad',
+  phone = '0555000000',
+  address_ar = 'الجزائر العاصمة',
+  address_fr = 'Alger',
+  address_en = 'Algiers',
+  opening_hours_ar = 'يومياً من 11:00 صباحاً إلى 00:00 منتصف الليل',
+  opening_hours_fr = 'Tous les jours de 11h à minuit',
+  opening_hours_en = 'Every day from 11:00 AM to Midnight',
+  opens_at = '11:00',
+  closes_at = '00:00'
+where id = 1;
+
