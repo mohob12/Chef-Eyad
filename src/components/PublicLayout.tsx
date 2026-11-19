@@ -29,31 +29,38 @@ export default function PublicLayout() {
   return (
     <>
       <header className={`site-header ${isHome ? 'header-overlay' : 'header-solid'} ${scrolled ? 'is-scrolled' : ''}`}>
-        <div className="container">
-          <Logo />
-          <nav className="site-nav">
-            <NavLink to="/" end>
-              {t('nav.menu')}
-            </NavLink>
-            <NavLink to="/reviews">{t('nav.reviews')}</NavLink>
-            <NavLink to="/careers">{t('nav.careers')}</NavLink>
-          </nav>
-          <div className="spacer" />
-          <LanguageSelect />
-          <button
-            className="btn btn-primary cart-btn"
-            onClick={() => setOpen(true)}
-            aria-label={t('nav.cart')}
-            data-testid="open-cart"
-          >
-            <CartIcon />
-            <span className="hide-sm">{t('nav.cart')}</span>
-            {count > 0 && (
-              <span className="cart-count" data-testid="cart-count">
-                {count}
-              </span>
-            )}
-          </button>
+        <div className="container header-container">
+          <div className="header-start">
+            <nav className="site-nav">
+              <NavLink to="/" end>
+                {t('nav.menu')}
+              </NavLink>
+              <NavLink to="/reviews">{t('nav.reviews')}</NavLink>
+              <NavLink to="/careers">{t('nav.careers')}</NavLink>
+            </nav>
+          </div>
+
+          <div className="header-center">
+            <Logo />
+          </div>
+
+          <div className="header-end">
+            <LanguageSelect />
+            <button
+              className="btn btn-primary cart-btn"
+              onClick={() => setOpen(true)}
+              aria-label={t('nav.cart')}
+              data-testid="open-cart"
+            >
+              <CartIcon />
+              <span className="hide-sm">{t('nav.cart')}</span>
+              {count > 0 && (
+                <span className="cart-count" data-testid="cart-count">
+                  {count}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
