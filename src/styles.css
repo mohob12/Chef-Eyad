@@ -251,37 +251,30 @@ p { margin: 0; }
     linear-gradient(90deg, rgba(8, 6, 5, 0.65) 0%, rgba(8, 6, 5, 0.25) 35%, transparent 65%);
 }
 
-/* Banner brand: Far left, completely frameless */
+/* Banner brand: Far left, completely frameless, centered contents */
 .hero-banner-brand {
   position: absolute; z-index: 2;
   left: 48px; right: auto;
   top: calc(50% + 28px); transform: translateY(-50%);
   width: auto; max-width: 320px;
-  display: flex; flex-direction: column; align-items: flex-start; text-align: start; gap: 8px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
   padding: 0; margin: 0;
   background: none; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
 }
 [dir='rtl'] .hero-banner-brand {
   left: 48px; right: auto;
-  align-items: flex-start; text-align: start;
-}
-@media (max-width: 768px) {
-  .hero-banner-brand {
-    left: 20px; right: auto;
-    top: calc(50% + 36px);
-    max-width: 240px;
-  }
+  align-items: center; text-align: center;
 }
 .hero-banner-brand img {
   width: auto; max-width: 175px; height: auto;
+  margin: 0 auto;
   filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
-}
-@media (max-width: 768px) {
-  .hero-banner-brand img { max-width: 120px; }
 }
 .hero-banner-tag {
   color: #f2b705; font-weight: 700; font-size: clamp(0.85rem, 1.25vw, 1.15rem);
-  letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 0.8em; white-space: nowrap;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  gap: 0.8em; white-space: nowrap; margin: 0 auto;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 [dir='rtl'] .hero-banner-tag { letter-spacing: 0; font-size: clamp(0.9rem, 1.35vw, 1.25rem); }
@@ -289,11 +282,56 @@ p { margin: 0; }
 
 /* Open / closed badge on banner */
 .hero-banner-brand .open-status {
-  display: inline-flex; align-items: center; gap: 0.6em; margin-top: 4px; padding: 0.45em 1.1em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  margin: 2px auto 0; padding: 0.45em 1.1em;
   border-radius: 999px; background: rgba(12, 10, 9, 0.75); border: 1px solid rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
   color: #fff; font-weight: 700; font-size: clamp(0.75rem, 1.05vw, 0.95rem); white-space: nowrap; line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .hero-banner-brand {
+    left: 20px; right: auto;
+    top: calc(50% + 52px);
+    max-width: 220px;
+    gap: 7px;
+    align-items: center;
+    text-align: center;
+  }
+  [dir='rtl'] .hero-banner-brand {
+    left: 20px; right: auto;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-banner-brand img {
+    max-width: 85px;
+  }
+  .hero-banner-tag {
+    font-size: 0.78rem;
+  }
+  .hero-banner-brand .open-status {
+    font-size: 0.72rem;
+    padding: 0.35em 0.85em;
+  }
+}
+@media (max-width: 480px) {
+  .hero-banner-brand {
+    left: 14px; right: auto;
+    top: calc(50% + 54px);
+    max-width: 190px;
+    gap: 6px;
+  }
+  .hero-banner-brand img {
+    max-width: 76px;
+  }
+  .hero-banner-tag {
+    font-size: 0.74rem;
+  }
+  .hero-banner-brand .open-status {
+    font-size: 0.68rem;
+    padding: 0.3em 0.75em;
+  }
 }
 /* Open / closed badge with a glowing, softly pulsing dot. */
 .open-status {

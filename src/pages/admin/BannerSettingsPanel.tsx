@@ -31,7 +31,10 @@ export default function BannerSettingsPanel() {
   useEffect(() => {
     if (currentSettings) {
       if (currentSettings.banner_images) setBanners(currentSettings.banner_images);
-      setHeroLogo(currentSettings.hero_logo_url || localStorage.getItem('mk_hero_logo_url') || '');
+      const savedHeroLogo = currentSettings.hero_logo_url !== undefined && currentSettings.hero_logo_url !== null
+        ? currentSettings.hero_logo_url
+        : (localStorage.getItem('mk_hero_logo_url') || '');
+      setHeroLogo(savedHeroLogo);
       setTaglineAr(currentSettings.hero_tagline_ar || localStorage.getItem('mk_hero_tagline_ar') || '');
       setTaglineFr(currentSettings.hero_tagline_fr || localStorage.getItem('mk_hero_tagline_fr') || '');
       setTaglineEn(currentSettings.hero_tagline_en || localStorage.getItem('mk_hero_tagline_en') || '');
@@ -404,10 +407,10 @@ export default function BannerSettingsPanel() {
           <div
             style={{
               width: 120,
-              height: 44,
+              height: 48,
               borderRadius: '6px',
               background: '#1a1815',
-              border: '1px solid rgba(0, 0, 0, 0.25)',
+              border: heroLogo === 'none' ? '1px dashed #e74c3c' : '1px solid rgba(212, 175, 55, 0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -415,18 +418,24 @@ export default function BannerSettingsPanel() {
               flexShrink: 0,
             }}
           >
-            <img
-              src={heroLogo || DEFAULT_HERO_LOGO}
-              alt="Hero Logo"
-              style={{ maxHeight: '36px', maxWidth: '100%', objectFit: 'contain' }}
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = DEFAULT_HERO_LOGO;
-              }}
-            />
+            {heroLogo === 'none' ? (
+              <span style={{ fontSize: '0.74rem', color: '#e74c3c', fontWeight: 700 }}>
+                🚫 {t('am.set.heroLogo.removedBadge')}
+              </span>
+            ) : (
+              <img
+                src={heroLogo || DEFAULT_HERO_LOGO}
+                alt="Hero Logo"
+                style={{ maxHeight: '38px', maxWidth: '100%', objectFit: 'contain' }}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = DEFAULT_HERO_LOGO;
+                }}
+              />
+            )}
           </div>
 
-          <div style={{ flex: 1, minWidth: 200, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ flex: 1, minWidth: 220, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
               <input
                 ref={heroLogoFileRef}
                 type="file"
@@ -443,11 +452,36 @@ export default function BannerSettingsPanel() {
               >
                 📁 {t('am.set.branding.upload')}
               </button>
-              {heroLogo && (
+
+              {heroLogo !== 'none' ? (
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-red"
+                  style={{ padding: '3px 10px', fontSize: '0.8rem', minHeight: 28, color: '#e74c3c', borderColor: '#e74c3c' }}
+                  disabled={busy}
+                  onClick={() => setHeroLogo('none')}
+                  title="إزالة الشعار كلياً من فوق البنر"
+                >
+                  🚫 {t('am.set.heroLogo.removeBtn')}
+                </button>
+              ) : (
                 <button
                   type="button"
                   className="btn btn-sm btn-ghost"
-                  style={{ padding: '2px 6px', fontSize: '0.75rem', minHeight: 'auto' }}
+                  style={{ padding: '3px 10px', fontSize: '0.8rem', minHeight: 28 }}
+                  disabled={busy}
+                  onClick={() => setHeroLogo('')}
+                  title="استعادة الشعار الافتراضي"
+                >
+                  ↺ {t('am.set.heroLogo.restoreBtn')}
+                </button>
+              )}
+
+              {heroLogo && heroLogo !== 'none' && (
+                <button
+                  type="button"
+                  className="btn btn-sm btn-ghost"
+                  style={{ padding: '2px 8px', fontSize: '0.75rem', minHeight: 28 }}
                   onClick={() => setHeroLogo('')}
                   title={t('am.set.branding.reset')}
                 >
@@ -456,15 +490,22 @@ export default function BannerSettingsPanel() {
               )}
             </div>
 
-            <input
-              className="input input-sm"
-              type="text"
-              dir="ltr"
-              placeholder={DEFAULT_HERO_LOGO}
-              value={heroLogo}
-              onChange={(e) => setHeroLogo(e.target.value)}
-              style={{ fontSize: '0.8rem', padding: '4px 8px', height: '30px' }}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <input
+                className="input input-sm"
+                type="text"
+                dir="ltr"
+                placeholder={DEFAULT_HERO_LOGO}
+                value={heroLogo}
+                onChange={(e) => setHeroLogo(e.target.value)}
+                style={{ fontSize: '0.8rem', padding: '4px 8px', height: '30px' }}
+              />
+              {heroLogo === 'none' && (
+                <span className="small" style={{ color: '#e74c3c', fontSize: '0.74rem', fontWeight: 600 }}>
+                  ✓ تم إلغاء الشعار كلياً (لن يظهر أي شعار فوق البنر عند الحفظ).
+                </span>
+              )}
+            </div>
           </div>
         </div>
 

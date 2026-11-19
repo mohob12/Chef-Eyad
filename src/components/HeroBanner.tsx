@@ -11,7 +11,13 @@ export default function HeroBanner() {
   const now = useNow();
   const status = settings ? openStatus(settings, now) : null;
 
-  const heroLogoSrc = settings?.hero_logo_url || localStorage.getItem('mk_hero_logo_url') || '/brand/logo@banner.png';
+  const rawHeroLogo = settings?.hero_logo_url !== undefined && settings.hero_logo_url !== null
+    ? settings.hero_logo_url
+    : localStorage.getItem('mk_hero_logo_url');
+
+  const isHeroLogoHidden = rawHeroLogo === 'none' || rawHeroLogo === 'hide' || rawHeroLogo === 'hidden';
+  const heroLogoSrc = isHeroLogoHidden ? null : (rawHeroLogo || '/brand/logo@banner.png');
+
   const customTagline =
     (settings ? loc(settings, 'hero_tagline', locale) : '') ||
     localStorage.getItem(`mk_hero_tagline_${locale}`) ||
@@ -98,7 +104,9 @@ export default function HeroBanner() {
 
       {/* Brand & Open Status Badge overlay */}
       <div className="hero-banner-brand">
-        <img src={heroLogoSrc} alt="Chef Eyad" width={792} height={240} />
+        {heroLogoSrc && (
+          <img src={heroLogoSrc} alt="Chef Eyad" width={792} height={240} />
+        )}
         <span className="hero-banner-tag">{customTagline}</span>
         {customStatus ? (
           <span
