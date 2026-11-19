@@ -102,12 +102,16 @@ export default function HeroBanner() {
         ))}
       </div>
 
-      {/* Brand & Open Status Badge overlay */}
+      {/* Brand block on far left */}
       <div className="hero-banner-brand">
         {heroLogoSrc && (
           <img src={heroLogoSrc} alt="Chef Eyad" width={792} height={240} />
         )}
         <span className="hero-banner-tag">{customTagline}</span>
+      </div>
+
+      {/* Open / Closed Status Badge at the bottom center of the banner */}
+      <div className="hero-banner-bottom-status">
         {customStatus ? (
           <span
             className={`open-status ${status ? (status.open ? 'is-open' : 'is-closed') : 'is-open'}`}
