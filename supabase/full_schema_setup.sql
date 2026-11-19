@@ -820,9 +820,9 @@ on conflict do nothing;
 -- 4. Initial Restaurant Settings for Chef Eyad
 update public.restaurant_settings set
   name = 'Chef Eyad',
-  name_ar = 'شيف إياد',
-  name_fr = 'Chef Eyad',
-  name_en = 'Chef Eyad',
+  hero_title_ar = 'شيف إياد',
+  hero_title_fr = 'Chef Eyad',
+  hero_title_en = 'Chef Eyad',
   phone = '0555000000',
   address_ar = 'الجزائر العاصمة',
   address_fr = 'Alger',
