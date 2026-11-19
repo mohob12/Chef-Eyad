@@ -32,6 +32,7 @@ export default function PublicLayout() {
       <header className={`site-header ${isHome ? 'header-overlay' : 'header-solid'} ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container header-container">
           <div className="header-start">
+            <ThemeToggle />
             <nav className="site-nav">
               <NavLink to="/" end>
                 {t('nav.menu')}
@@ -46,7 +47,6 @@ export default function PublicLayout() {
           </div>
 
           <div className="header-end">
-            <ThemeToggle />
             <LanguageSelect />
             <button
               className="btn btn-primary cart-btn"
