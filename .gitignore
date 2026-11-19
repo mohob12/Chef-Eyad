@@ -8,3 +8,4 @@ supabase/.temp
 supabase/.branches
 .hoplite
 .context
+.DS_Store
