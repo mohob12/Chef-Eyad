@@ -5,18 +5,21 @@ import App from './App';
 import { I18nProvider } from './lib/i18n';
 import { AuthProvider } from './lib/auth';
 import { CartProvider } from './lib/cart';
+import { ThemeProvider } from './lib/theme';
 import './styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <I18nProvider>
-        <AuthProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </AuthProvider>
-      </I18nProvider>
+      <ThemeProvider>
+        <I18nProvider>
+          <AuthProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </AuthProvider>
+        </I18nProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 );

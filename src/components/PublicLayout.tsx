@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import LanguageSelect from './LanguageSelect';
+import ThemeToggle from './ThemeToggle';
 import CartDrawer from './CartDrawer';
 import SocialLinks from './SocialLinks';
 import { useI18n } from '../lib/i18n';
@@ -45,6 +46,7 @@ export default function PublicLayout() {
           </div>
 
           <div className="header-end">
+            <ThemeToggle />
             <LanguageSelect />
             <button
               className="btn btn-primary cart-btn"
