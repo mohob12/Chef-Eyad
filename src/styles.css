@@ -948,6 +948,18 @@ input[type='range'] { accent-color: var(--red); width: 100%; }
   .admin-top { padding: 10px 16px; }
   .admin-content { padding: 16px; }
   .site-nav { display: none; }
+  .site-header .container.header-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+  }
 }
 @media (max-width: 640px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
