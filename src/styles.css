@@ -256,7 +256,7 @@ p { margin: 0; }
   position: absolute; z-index: 2;
   left: 48px; right: auto;
   top: calc(50% + 28px); transform: translateY(-50%);
-  width: auto; max-width: 320px;
+  width: max-content; max-width: 340px;
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
   padding: 0; margin: 0;
   background: none; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
@@ -292,20 +292,21 @@ p { margin: 0; }
 
 @media (max-width: 768px) {
   .hero-banner-brand {
-    left: 20px; right: auto;
-    top: calc(50% + 52px);
-    max-width: 220px;
+    left: 16px; right: auto;
+    top: calc(50% + 50px);
+    width: max-content;
+    max-width: calc(100% - 32px);
     gap: 7px;
     align-items: center;
     text-align: center;
   }
   [dir='rtl'] .hero-banner-brand {
-    left: 20px; right: auto;
+    left: 16px; right: auto;
     align-items: center;
     text-align: center;
   }
   .hero-banner-brand img {
-    max-width: 85px;
+    max-width: 80px;
   }
   .hero-banner-tag {
     font-size: 0.78rem;
@@ -317,13 +318,14 @@ p { margin: 0; }
 }
 @media (max-width: 480px) {
   .hero-banner-brand {
-    left: 14px; right: auto;
-    top: calc(50% + 54px);
-    max-width: 190px;
+    left: 12px; right: auto;
+    top: calc(50% + 52px);
+    width: max-content;
+    max-width: calc(100% - 24px);
     gap: 6px;
   }
   .hero-banner-brand img {
-    max-width: 76px;
+    max-width: 74px;
   }
   .hero-banner-tag {
     font-size: 0.74rem;
