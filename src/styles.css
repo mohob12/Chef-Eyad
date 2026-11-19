@@ -121,59 +121,146 @@ p { margin: 0; }
 .alert-info { background: var(--beige-deep); }
 .alert-warn { background: rgba(242, 183, 5, 0.18); border: 1.5px solid var(--yellow); }
 
-/* ---------- Header ---------- */
+/* ---------- Header (Luxury Integrated Header) ---------- */
 .site-header {
-  position: sticky; top: 0; z-index: 40; background: rgba(246, 239, 227, 0.92);
-  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50; width: 100%;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+.site-header.header-overlay {
+  background: linear-gradient(180deg, rgba(8, 6, 5, 0.88) 0%, rgba(8, 6, 5, 0.45) 60%, transparent 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.site-header.is-scrolled,
+.site-header.header-solid {
+  background: rgba(14, 11, 10, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
 }
 .site-header .container { height: var(--header-h); display: flex; align-items: center; gap: 16px; }
-.site-nav { display: flex; gap: 4px; }
-.site-nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--muted); }
-.site-nav a.active, .site-nav a:hover { color: var(--black); background: rgba(27, 27, 27, 0.05); }
-.cart-btn { position: relative; }
+.site-nav { display: flex; gap: 6px; }
+.site-nav a {
+  padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 700;
+  color: #f6efe3; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); transition: all 0.2s ease;
+}
+.site-nav a.active, .site-nav a:hover {
+  color: #f2b705; background: rgba(255, 255, 255, 0.12);
+  text-shadow: 0 0 12px rgba(242, 183, 5, 0.5);
+}
+.site-header .cart-btn {
+  position: relative;
+  background: linear-gradient(135deg, #d7261e 0%, #a81711 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(215, 38, 30, 0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.site-header .cart-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(215, 38, 30, 0.65);
+}
 .cart-count {
   position: absolute; top: -6px; inset-inline-end: -6px; min-width: 22px; height: 22px; padding: 0 6px;
-  border-radius: 999px; background: var(--red); color: var(--white); font-size: 0.75rem; font-weight: 800;
-  display: grid; place-items: center; border: 2px solid var(--beige);
+  border-radius: 999px; background: #f2b705; color: #1b1b1b; font-size: 0.75rem; font-weight: 800;
+  display: grid; place-items: center; border: 2px solid #14110f;
+}
+.site-header .lang-btn {
+  background: rgba(18, 14, 12, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f6efe3;
+  transition: all 0.2s ease;
+}
+.site-header .lang-btn:hover {
+  border-color: #f2b705;
+  background: rgba(24, 19, 16, 0.85);
+}
+.site-header .lang-globe {
+  color: #f2b705;
 }
 
-/* Logo: the restaurant’s own artwork (public/brand). */
-.logo { display: inline-flex; align-items: center; text-decoration: none; flex: none; }
-.logo img { height: 40px; width: auto; }
+/* Page content margins for fixed header */
+.main-inner { padding-top: var(--header-h); }
+.main-home { padding-top: 0; }
 
-/* ---------- Hero banner (full width, 3:1) ---------- */
-.hero-banner { position: relative; width: 100%; aspect-ratio: 3 / 1; overflow: hidden; background: #141414; isolation: isolate; }
+/* Logo: the restaurant’s artwork */
+.logo { display: inline-flex; align-items: center; text-decoration: none; flex: none; }
+.logo img {
+  height: 48px; width: auto; object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+  transition: transform 0.2s ease;
+}
+.logo:hover img { transform: scale(1.04); }
+
+/* ---------- Hero banner (full width, Luxury integrated) ---------- */
+.hero-banner {
+  position: relative; width: 100%;
+  aspect-ratio: 21 / 9; min-height: 480px; max-height: 640px;
+  overflow: hidden; background: #0e0c0b; isolation: isolate;
+}
+@media (max-width: 768px) {
+  .hero-banner { aspect-ratio: 16 / 11; min-height: 380px; max-height: 480px; }
+}
 .hero-banner-photo {
   position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover;
-  transform-origin: 40% 50%; animation: banner-drift 26s ease-in-out infinite alternate;
+  object-position: 70% 35%;
+  transform-origin: 65% 40%; animation: banner-drift 26s ease-in-out infinite alternate;
 }
-@keyframes banner-drift { from { transform: scale(1.02); } to { transform: scale(1.09) translateX(-1%); } }
+@keyframes banner-drift { from { transform: scale(1.02); } to { transform: scale(1.08) translateX(-1%); } }
 @media (prefers-reduced-motion: reduce) { .hero-banner-photo { animation: none; transform: scale(1.02); } }
-/* Dark falloff on the logo side plus soft top/bottom letterbox shading. */
+
+/* Luxury vignette overlay */
 .hero-banner::after {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(270deg, rgba(12, 10, 9, 0.93) 0%, rgba(12, 10, 9, 0.84) 24%, rgba(12, 10, 9, 0.45) 38%, rgba(12, 10, 9, 0.1) 52%, transparent 62%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0%, transparent 22%, transparent 74%, rgba(0, 0, 0, 0.42) 100%);
+    /* Top dark falloff for transparent header text */
+    linear-gradient(180deg, rgba(8, 6, 5, 0.85) 0%, rgba(8, 6, 5, 0.4) 22%, transparent 45%, rgba(10, 8, 7, 0.8) 100%),
+    /* Left subtle shade for brand card */
+    linear-gradient(90deg, rgba(10, 8, 7, 0.75) 0%, rgba(10, 8, 7, 0.4) 30%, transparent 60%);
 }
+[dir='rtl'] .hero-banner::after {
+  background:
+    linear-gradient(180deg, rgba(8, 6, 5, 0.85) 0%, rgba(8, 6, 5, 0.4) 22%, transparent 45%, rgba(10, 8, 7, 0.8) 100%),
+    linear-gradient(90deg, rgba(10, 8, 7, 0.75) 0%, rgba(10, 8, 7, 0.4) 30%, transparent 60%);
+}
+
 .hero-banner-brand {
-  position: absolute; z-index: 2; right: 4.5%; top: 56%; transform: translateY(-50%);
-  width: 25%; display: flex; flex-direction: column; align-items: center; gap: 0.9vw;
+  position: absolute; z-index: 2; left: 5%; top: calc(50% + 24px); transform: translateY(-50%);
+  width: min(320px, 35%); display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 18px; border-radius: 20px;
+  background: rgba(12, 10, 9, 0.68);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.12);
 }
-.hero-banner-brand img { width: 100%; height: auto; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55)); }
+@media (max-width: 768px) {
+  .hero-banner-brand {
+    left: 50%; top: calc(50% + 32px); transform: translate(-50%, -50%);
+    width: 88%; max-width: 300px; padding: 14px 12px; gap: 6px;
+  }
+}
+.hero-banner-brand img {
+  width: 100%; max-width: 140px; height: auto;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8));
+}
+@media (max-width: 768px) {
+  .hero-banner-brand img { max-width: 100px; }
+}
 .hero-banner-tag {
-  color: rgba(255, 255, 255, 0.88); font-weight: 600; font-size: clamp(0.62rem, 1.15vw, 1.05rem);
-  letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 0.8em; white-space: nowrap;
+  color: #f2b705; font-weight: 700; font-size: clamp(0.78rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 0.8em; white-space: nowrap;
 }
 /* Letter-spacing would break Arabic letter joining. */
-[dir='rtl'] .hero-banner-tag { letter-spacing: 0; font-size: clamp(0.7rem, 1.3vw, 1.2rem); }
-.hero-banner-tag::before, .hero-banner-tag::after { content: ''; width: 2.2em; height: 1px; background: rgba(242, 183, 5, 0.75); }
+[dir='rtl'] .hero-banner-tag { letter-spacing: 0; font-size: clamp(0.85rem, 1.3vw, 1.15rem); }
+.hero-banner-tag::before, .hero-banner-tag::after { content: ''; width: 2em; height: 1px; background: rgba(242, 183, 5, 0.6); }
 /* Open / closed badge with a glowing, softly pulsing dot. */
 .open-status {
-  display: inline-flex; align-items: center; gap: 0.6em; margin-top: 0.2vw; padding: 0.42em 0.95em;
-  border-radius: 999px; background: rgba(0, 0, 0, 0.38); border: 1px solid rgba(255, 255, 255, 0.14);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  color: #fff; font-weight: 700; font-size: clamp(0.7rem, 1.05vw, 0.98rem); white-space: nowrap; line-height: 1.3;
+  display: inline-flex; align-items: center; gap: 0.6em; margin-top: 0.2vw; padding: 0.45em 1em;
+  border-radius: 999px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: #fff; font-weight: 700; font-size: clamp(0.72rem, 1.05vw, 0.96rem); white-space: nowrap; line-height: 1.3;
 }
 .open-sep { opacity: 0.6; }
 .open-status .open-dot {

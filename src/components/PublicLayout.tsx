@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import LanguageSelect from './LanguageSelect';
 import CartDrawer from './CartDrawer';
@@ -12,10 +13,22 @@ export default function PublicLayout() {
   const { t, locale } = useI18n();
   const { count, setOpen } = useCart();
   const settings = useSettings();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header ${isHome ? 'header-overlay' : 'header-solid'} ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container">
           <Logo />
           <nav className="site-nav">
@@ -44,7 +57,7 @@ export default function PublicLayout() {
         </div>
       </header>
 
-      <main>
+      <main className={isHome ? 'main-home' : 'main-inner'}>
         <Outlet />
       </main>
 
